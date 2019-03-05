@@ -1,5 +1,24 @@
 - SQLAlchemy.Model
-    - db.Column类型：
+    - db.Column 参数：
+        - name 数据库字段映射名称
+        - type 字段类型
+        - autoincrement 是否自增（primary key）
+        - default 设置默认值
+        - doc 可选，类似python类、函数的文档属性，不是数据库comment
+        - key
+        - index 是否为索引
+        - info
+        - nullable 如果设为 True，这列允许使用空值；如果设为 False，这列不允许使用空值
+        - onupdate 
+        - primary_key 是否为主键
+        - server_default
+        - server_onupdate
+        - quote
+        - unique 是否不允许出现重复的值
+        - system
+        - comment 数据库comment
+        
+    - db.Column.type类型：
         - Integer int 普通整数，一般是 32 位
         - SmallInteger int 取值范围小的整数，一般是 16 位
         - BigInteger int 或 long 不限制精度的整数
@@ -16,16 +35,10 @@
         - Interval datetime.timedelta 时间间隔
         - Enum str 一组字符串
         - PickleType 任何 Python 对象 自动使用 Pickle 序列化
-        - LargeBinary str 二进制文件
-
-    - db.Column其它参数：
-        - primary_key 如果设为 True，这列就是表的主键
-        - unique 如果设为 True，这列不允许出现重复的值
-        - index 如果设为 True，为这列创建索引，提升查询效率
-        - nullable 如果设为 True，这列允许使用空值；如果设为 False，这列不允许使用空值
-        - default 为这列定义默认值
+        - LargeBinary str 二进制
 
     - db.relationship类型：
+        - foreign_keys
         - backref 在关系的另一个模型中添加反向引用
         - primaryjoin 明确指定两个模型之间使用的联结条件。只在模棱两可的关系中需要指定
         - lazy 指定如何加载相关记录。可选值有 select（首次访问时按需加载）、 immediate（源对象加载后就加载）、 joined（加载记录，但使用联结）、 subquery（立即加载，但使用子查询）
@@ -33,6 +46,7 @@
         - order_by 指定关系中记录的排序方式
         - secondary 指定多对多关系中关系表的名字
         - secondaryjoin SQLAlchemy 无法自行决定时，指定多对多关系中的二级联结条件
+        - cascade
         
     - operation
         - insert
@@ -62,7 +76,33 @@
                 - get_or_404() 返回指定主键对应的行，如果没找到指定的主键，则终止请求，返回 404 错误响应
                 - count() 返回查询结果的数量
                 - paginate() 返回一个 Paginate 对象，它包含指定范围内的结果
-                
+            
+            - 聚合函数
+                - count 数据条数
+                - avg  平均数
+                - max  最大
+                - min  最小
+                - sum  求和
+            - 过滤方法
+                - equal
+                    - query.filter(User.name == 'ed')
+                - not equal
+                    - query.filter(User.name != 'ed')
+                - like
+                    - query.filter(User.name.like('%ed%'))
+                - in
+                    - query.filter(User.name.in_(\['ed','wendy','jack'\]))
+                - not in
+                    - query.filter(~User.name.in_('ed','wendy','jack'))
+                - is null (same as == None)
+                    - query.filter(User.name.is_(None))
+                - is not null
+                    - query.filter(User.name.isnot(None)
+                - and
+                    - query.filter(User.name=='ed', User.fullname=='Ed Jones')
+                    - query.filter(and_(User.name=='ed', User.fullname=='Ed Jones'))
+                - or
+                    - query.filter(or_(User.name='ed', User.name='wendy'))
             - eg: User.query.filter_by(role=user_role).all()
             
 ```python
