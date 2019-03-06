@@ -1,0 +1,22 @@
+- flask上下文
+    - 上下文
+        - 程式运行的情景
+        - flask上下文 
+            - 应用上下文 flask.ctx.AppContext flask.ctx._AppCtxGlobals
+                - flask.globals._app_ctx_stack = LocalStack() 应用上下文管理器
+                - flask.globals.current_app = LocalProxy(_find_app) = _app_ctx_stack.top.app
+                - flask.globals.g = LocalProxy(partial(_lookup_app_object, 'g')) = _app_ctx_stack.top.g
+            - 单个请求完整过程的全局上下文 flask.ctx.RequestContext 
+                - 参考博客 https://blog.csdn.net/regandu/article/details/80239543
+                - flask.globals._request_ctx_stack = LocalStack() 请求上下文管理器
+                - flask.globals.request = LocalProxy(partial(_lookup_req_object, 'request')) = _request_ctx_stack.top.request
+                - flask.globals.session = LocalProxy(partial(_lookup_req_object, 'session')) = _request_ctx_stack.top.session
+    - 参考博客 
+        - 应用上下文
+            - 应用程序上下文在一个请求、CLI命令或者其他活动期间保持追踪应用程序级别数据(如config)
+            - 与传递应用程序对象相比，使用current_app|g两个代理，避免重复导入的问题
+            - 在处理一个请求或运行一个cli注册命令时，产生current_app程序上下文
+            - https://blog.csdn.net/regandu/article/details/80199061
+        - 请求上下文 
+            - yyy
+            - https://blog.csdn.net/m0_37519490/article/details/80774069

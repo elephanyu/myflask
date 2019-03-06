@@ -18,10 +18,6 @@ class Config:
     MYFLASK_COMMENTS_PER_PAGE = 3
     MYFLASK_SLOW_DB_QUERY_TIME = 0.5
 
-    @staticmethod
-    def init_app(app):
-        pass
-
 
 class DevelopmentConfig(Config):
     DEBUG = True

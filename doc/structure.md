@@ -3,17 +3,18 @@
         - 路由、调试和Web服务器网关接口WSGI（Web Server Gateway Interface）子系统由Werkzeug提供
         - 模板系统由Jinja2提供
     - 不原生支持数据库访问、Web表单验证和用户认证等高级功能。大多数Web程序中需要的核心服务都以扩展的形式实现， 然后再与核心包集成
-        - 数据库访问 Flask-SQLAlchemy
-        - 数据迁移跟踪记录（更改、回滚） Flask-Migrate
+        - 数据库ORM Flask-SQLAlchemy
+        - 数据迁移 Flask-Migrate
         - 数据库管理工具 flask-admin
         - 表单验证 Flask-WTF
         - session管理 Flask-Login
         - 用户认证  Flask-HTTPAuth
+        - 用户管理功能 Flask-User
+        - flask-cache
         - 邮件功能 Flask-Mail
         - 命令行操作 flask-script
         - 权限管理 flask-principal
         - RESTful框架 flask-restful flask-api
-        - 用户管理功能 Flask-User
         - 应用安全机制 flask-security
         - 国际化和本地化 flask-babel
         - 应用语言包 flask-locale
@@ -28,36 +29,24 @@
         - after_request：注册一个函数，如果没有未处理的异常抛出，在每次请求之后运行。
         - teardown_request：注册一个函数，即使有未处理的异常抛出，也在每次请求之后运行
 
-- project
+- project 通用结构
     - app/
-        - \_\_init__.py      初始化app，注册蓝本
-        - email.py           mail定义
-        - models.py          数据模型定义
-        - decorators.py      通用路由permission_required、admin_required装饰器定义   
-        - templates/         JinJia模板路径
-        - static/            静态文件路径
-        - main/              main模块
-            - \_\_init__.py  初始化main蓝本
-            - errors.py      common err rewrite
-            - forms.py       post、comment、user profile表单
-            - views.py       相关路由与请求处理
-            ###### [RequestHandleClass.handle function] request detail handle by blueprint and rule map
-        - auth/
+        - \_\_init__.py      应用初始化\[flask初始化、配置加载、插件初始化、蓝本注册\]
+        - models.py          数据模型定义   
+        - templates/         前端模板默认路径
+        - static/            静态文件默认路径
+        - blue1/             大类1\[蓝本1\]
+            - \_\_init__.py  蓝本1初始化
+            - forms.py       
+            - views.py       
+        - blue2/             蓝本2
             - \_\_init__.py
-            - forms.py       用户注册、登录、密码修改、密码重置、邮箱修改表单
-            - views.py       相关路由与请求处理
-        - api/
-            - \_\_init__.py
-            - authentication.py auth模块部分引入与重写
-            - decorators.py     api路由permision_required装饰器定义
-            - errors.py         api common err定义
-            - comments.py       comment api
-            - posts.py          post api
-            - users.py          user api
+            - view1.py
+            - view2.py
         - tests/             测试路径
             - \_\_init__.py   
-            - test*.py
-    - config.py              配置文件 db、mail、page set
-    - manage.py              启动文件 db init|creat_all|upgrade、shell、runserver and other command
+            - test1.py
+    - config.py              app配置
+    - manage.py              app代管 db init|creat_all|upgrade、shell、runserver and other command
     - requirements.txt       依赖包
-    - venv/                  虚拟环境
+    - venv                   app虚拟环境

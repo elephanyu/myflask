@@ -1,5 +1,5 @@
 - jinjia
-    - 业务逻辑和表现逻辑
+    - web业务逻辑和表现逻辑
         - 业务逻辑 路由函数处理请求
         - 表现逻辑 jinjia模板
     - Flask提供的render_template函数把Jinja2模板引擎集成到了程序中
@@ -15,7 +15,7 @@
                 <p>A value from a list, with a variable index: {{ mylist[myintvar] }}.</p>
                 <p>A value from an object's method: {{ myobj.somemethod() }}.</p>
                 ```
-            - 变量过滤器
+            - 变量处理器
                 - safe 渲染值时不转义
                 - capitalize 把值的首字母转换成大写，其他字母转换成小写
                 - lower 把值转换成小写形式
