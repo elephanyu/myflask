@@ -7,16 +7,17 @@
                 - flask.globals.current_app = LocalProxy(_find_app) = _app_ctx_stack.top.app
                 - flask.globals.g = LocalProxy(partial(_lookup_app_object, 'g')) = _app_ctx_stack.top.g
             - 单个请求完整过程的全局上下文 flask.ctx.RequestContext 
-                - 参考博客 https://blog.csdn.net/regandu/article/details/80239543
                 - flask.globals._request_ctx_stack = LocalStack() 请求上下文管理器
                 - flask.globals.request = LocalProxy(partial(_lookup_req_object, 'request')) = _request_ctx_stack.top.request
                 - flask.globals.session = LocalProxy(partial(_lookup_req_object, 'session')) = _request_ctx_stack.top.session
     - 参考博客 
+        - 当一个Flask应用程序开始处理一个请求时，它会推送一个请求上下文，也会推送一个应用程序上下文。当请求结束时，它会取出这个请求上下文，随后取出应用程序上下文。  
+        - 对于每个线程（或者其他类型的工作者）来说，上下文都是唯一的。request不能被传递到其他线程，其他线程会有一个不同的上下文堆，并且它们并不知道福线程指向的请求是什么。
+        - 当请求开始时，一个RequestContext被创建并且被推送，如果应用程序的一个上下文还不是最顶部的上下文，那么它将先创建和推送一个AppContext。在这些上下文被推送时，current_app，g，request以及session代理，对于处理这个请求的原始线程来说都是可用的。
         - 应用上下文
             - 应用程序上下文在一个请求、CLI命令或者其他活动期间保持追踪应用程序级别数据(如config)
-            - 与传递应用程序对象相比，使用current_app|g两个代理，避免重复导入的问题
-            - 在处理一个请求或运行一个cli注册命令时，产生current_app程序上下文
             - https://blog.csdn.net/regandu/article/details/80199061
         - 请求上下文 
-            - yyy
+            - 在一个独立的请求内保持追踪应用程序等级的数据
+            - https://blog.csdn.net/regandu/article/details/80239543
             - https://blog.csdn.net/m0_37519490/article/details/80774069
