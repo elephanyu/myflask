@@ -1,0 +1,31 @@
+##### flask-login 回话管理（用户体系的用户验证体系）
+- 参考 http://www.pythondoc.com/flask-login/index.html
+    - 初始化
+        - 在app上绑定login_manager类
+        - 在app上增加一个after_request处理函数_update_remember_cookie
+        - 在请求上下文上注册一个user上下文处理函数，管理用户上下文current_user
+            - flask_login.utils.current_user = _request_ctx_stack.top.user
+            - 单个request请求第一次调用current_user时根据LoginManager.user_load回到函数生成，后面直接使用
+    - loginManager常见操作
+        - is_authenticated
+        - is_active
+        - is_anonymous
+        - get_id()
+    - 封装工具
+        - confirm_login() fresh current session
+        - login_user(user, remember=False, duration=None, force=False, fresh=True) 登录用户，生成session+user请求上下文 
+        - logout_user() 删除当前request的用户seesion，重新生成user请求上下文（None）
+        - login_required(func) 需要登录操作的视图装饰器
+        - fresh_login_required(func) 需要新鲜登录的视图装饰器
+    - 信号
+        - user_logged_in 登入
+        - user_logged_out 登出
+        - user_login_confirmed 登入被证实后标记为活跃
+        - user_unauthorized unauthorized被调用时发出
+        - user_needs_refresh needs_refresh方法被调用时发出
+        - user_loaded_from_cookie 
+        - user_loaded_from_header
+        - user_loaded_from_request
+        - user_accessed 
+        - session_protected    
+    
