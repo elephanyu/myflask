@@ -83,6 +83,8 @@
             - db.session.delete(mod_role)
             - db.session.commit()
         - query
+            - 返回数据集合，拥有表字段属性，拥有表默认方法(query)和定义应用方法
+                - 用户表加工成权限需求装饰器【login_required|admin_required】
             - 查询过滤器：
                 - filter() 把过滤器添加到原查询上，返回一个新查询
                 - filter_by() 把等值过滤器添加到原查询上，返回一个新查询

@@ -47,6 +47,6 @@
             - \_\_init__.py   
             - test1.py
     - config.py              app配置
-    - manage.py              app代管 db init|creat_all|upgrade、shell、runserver and other command
+    - run.py              app代管 db init|creat_all|upgrade、shell、runserver and other command
     - requirements.txt       依赖包
     - venv                   app虚拟环境

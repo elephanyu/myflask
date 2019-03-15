@@ -21,3 +21,43 @@
             - 在一个独立的请求内保持追踪应用程序等级的数据
             - https://blog.csdn.net/regandu/article/details/80239543
             - https://blog.csdn.net/m0_37519490/article/details/80774069
+    - 常见使用
+        - current_app
+            - current_app._get_current_object().app_context().push() 单个请求内使用子进程|线程|协程时用于产生应用上下文
+            - current_app.config\['SETTING_NAME'\] 获取应用配置
+            - current_app.root_path 获取应用运行路径
+            - current_app.debug 应用是否使用debug模式，可在处理方法中预留debug代码
+        - request
+            - request.path
+            - request.method
+            - **request.view_args
+            - request.args.get(key, default=None,type=None)
+            - request.args\[key\]
+            - request.form.getlist(key)
+            - request.form.get(key)
+            - request.form\[key\]
+            - request.form
+            - request.values.get(key)
+            - request.values\[key\]
+            - request.files
+            - request.cookies\[key\]
+            - request.headers\[key\]
+            - request.headers.get(key)
+            - request.remote_addr
+            - request.user_agent
+            - request.url
+            - request.base_url
+            - request.endpoint 
+            - request.blueprint
+            - request.mimetype
+        - session
+            - session\[key\] = value
+            - session.setdefault(key, value)
+            - session.get(key)
+            - session.pop(key)
+            - session.clear()
+            - session.permanent
+            - session.modified
+            - session.accessed
+        - current_user
+            
