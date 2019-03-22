@@ -94,6 +94,7 @@
                         ```
     - Flask-Bootstrap 
         - 集成Twitter Bootstrap 
+            - 引入了Bootstrap 中的所有CSS和JavaScript文件
             - 业务逻辑引入
                 ```python
                 from flask import Flask
@@ -124,7 +125,7 @@
                 </div>
                 {% endblock %}
                 ```
-        - Flask-Bootstrap基模板中定义的块
+        - bootstrap/base.html中定义的块
             - doc 整个 HTML 文档
             - html_attribs \<html\> 标签的属性
             - html \<html\> 标签中的内容
@@ -144,5 +145,3 @@
             <script type="text/javascript" src="my-script.js"></script>
             {% endblock %}
             ```
-        - templates/base.html 包含导航条的程序基模板
-        - templates/404.html 使用模板继承机制自定义404错误页面
